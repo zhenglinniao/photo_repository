@@ -1,0 +1,9 @@
+2024/08/25 16:09:48 PhotoAlbum.go:34: This is a regular log entry.
+2024/08/25 16:09:48 PhotoAlbum.go:35: Formatted log entry: example
+2024/08/25 16:09:48 PhotoAlbum.go:38: Error occurred: <nil>
+2024/08/25 16:10:26 PhotoAlbum.go:34: This is a regular log entry.
+2024/08/25 16:10:26 PhotoAlbum.go:35: Formatted log entry: example
+2024/08/25 16:10:26 PhotoAlbum.go:38: Error occurred: <nil>
+2024/08/25 16:11:23 PhotoAlbum.go:34: This is a regular log entry.
+2024/08/25 16:11:23 PhotoAlbum.go:35: Formatted log entry: example
+2024/08/25 16:11:23 PhotoAlbum.go:38: Error occurred: <nil>

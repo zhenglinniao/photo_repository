@@ -1,0 +1,217 @@
+
+
+{{template "header" .}}
+
+
+<style>
+    .btn-80,
+.btn-80 *,
+.btn-80 :after,
+.btn-80 :before,
+.btn-80:after,
+.btn-80:before {
+  border: 0 solid;
+  box-sizing: border-box;
+}
+.btn-80 {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: button;
+  background-color: #000;
+  background-image: none;
+  color: #fff;
+  cursor: pointer;
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    Segoe UI, Roboto, Helvetica Neue, Arial, Noto Sans, sans-serif,
+    Apple Color Emoji, Segoe UI Emoji, Segoe UI Symbol, Noto Color Emoji;
+  font-size: 30%;
+  font-weight: 900;
+  line-height: 1.5;
+  margin: 0;
+  -webkit-mask-image: -webkit-radial-gradient(#000, #fff);
+  padding: 0.6rem 1.5rem;;
+}
+.btn-80:disabled {
+  cursor: default;
+}
+.btn-80:-moz-focusring {
+  outline: auto;
+}
+.btn-80 svg {
+  display: block;
+  vertical-align: middle;
+}
+.btn-80 [hidden] {
+  display: none;
+}
+.btn-80 {
+  border: 2px solid;
+  border-radius: 999px;
+  box-sizing: border-box;
+  display: block;
+  overflow: hidden;
+  padding: 1.2rem 3rem;
+  position: relative;
+  text-transform: uppercase;
+}
+.btn-80 span {
+  font-weight: 900;
+  mix-blend-mode: difference;
+}
+.btn-80:before {
+  background: #fff;
+  content: "";
+  height: 100%;
+  left: 0;
+  position: absolute;
+  top: 0;
+}
+.btn-80:hover:before {
+  -webkit-animation: progress-bar 1.2s;
+  animation: progress-bar 1.2s;
+}
+@-webkit-keyframes progress-bar {
+  0% {
+    opacity: 1;
+    width: 0;
+  }
+  10% {
+    opacity: 1;
+    width: 15%;
+  }
+  25% {
+    opacity: 1;
+    width: 25%;
+  }
+  40% {
+    opacity: 1;
+    width: 35%;
+  }
+  55% {
+    opacity: 1;
+    width: 75%;
+  }
+  60% {
+    opacity: 1;
+    width: 100%;
+  }
+  to {
+    opacity: 0;
+    width: 100%;
+  }
+}
+@keyframes progress-bar {
+  0% {
+    opacity: 1;
+    width: 0;
+  }
+  10% {
+    opacity: 1;
+    width: 15%;
+  }
+  25% {
+    opacity: 1;
+    width: 25%;
+  }
+  40% {
+    opacity: 1;
+    width: 35%;
+  }
+  55% {
+    opacity: 1;
+    width: 75%;
+  }
+  60% {
+    opacity: 1;
+    width: 100%;
+  }
+  to {
+    opacity: 0;
+    width: 100%;
+  }
+}
+
+</style>
+<div class="photo-album-list">
+    <div class="site-name">
+        <div style="display: flex">
+            <svg class="logo" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg"  width="200" height="200"><path d="M613.952 64a64 64 0 0 1 56.768 34.464L719.36 192H928a96 96 0 0 1 96 96v576a96 96 0 0 1-96 96H96a96 96 0 0 1-96-96V288a96 96 0 0 1 96-96h240.64l48.64-93.536A64 64 0 0 1 442.048 64h171.904zM512 288a288 288 0 1 0 0 576 288 288 0 0 0 0-576z m0 96a192 192 0 1 1 0 384 192 192 0 0 1 0-384z"></path><path d="M192 96h32a64 64 0 0 1 64 64H128a64 64 0 0 1 64-64z"></path></svg>
+            <h1>{{ .Config.SiteName }}</h1>
+        </div>
+        <div class="site-sub-title">
+            除了看见照片，不然我已经回忆不了当时的情景，<br>
+            和音符一样，只有某个旋律，才能唤醒沉寂的回忆，让时间的细节再次绽放。</div>
+    </div>
+    {{ range .PhotoAlbumList }}
+    {{ $path := .Path }}
+    <div class="photo-album">
+        <div class="photo-album-title">
+            <svg class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" width="200" height="200"><path d="M118.784 413.696v458.752h786.432V413.696H118.784z m-32.768-65.536h851.968c9.556992 0 17.408 3.072 23.552 9.216s9.216 13.995008 9.216 23.552v524.288c0 9.556992-3.072 17.408-9.216 23.552s-13.995008 9.216-23.552 9.216H86.016c-9.556992 0-17.408-3.072-23.552-9.216s-9.216-13.995008-9.216-23.552V380.928c0-9.556992 3.072-17.408 9.216-23.552s13.995008-9.216 23.552-9.216z m65.536-131.072h720.896v65.536H151.552v-65.536z m98.304-131.072h524.288v65.536H249.856V86.016z"></path></svg>
+            <h2>{{ .Title }}</h2>
+        </div>
+
+        <div class="photo-album-info">
+            <span>Author:{{ .Author }}</span>
+            <span>CreatedAt:{{ .CreatedAt.Format "2006-01-02" }}</span>
+            <span>Count:{{ .Count }}</span>
+            <p>{{ .Descriptions }}</p>
+        </div>
+
+        <!-- 添加显示/隐藏按钮 -->
+        <button class="btn-80" onclick="togglePhotos('photos-{{ $path }}')">显示/隐藏照片</button>
+
+        <!-- 图片列表，默认隐藏 -->
+        <div id="photos-{{ $path }}" class="photos" style="display:none;">
+            <div class="photos">
+                {{ range .Photos }}
+                <div class="photo-block">
+                    <div class="block-head">
+                        <img class="photo" src="/public/cover/{{ $path }}/{{ .Name }}{{ .Format }}" alt="">
+                        <div class="photo-shadow" style="background: url('/public/cover/{{ $path }}/{{ .Name }}{{ .Format }}') 0% 0% / cover transparent"></div>
+                    </div>              
+                    <div class="title-date">
+                        <h3>{{ .Name }}</h3>
+                        <span>{{.ShotTime.Format "2006-01-02 15:04"}}</span>
+                    </div>
+                    <div class="params">
+                        <p>Size:{{.Size}}M({{.Width}} * {{.Height}})</p>
+                        <p>ISO:{{.ISO}}</p>
+                        <p>Camera:{{.Camera}} - {{.CameraModel}}</p>
+                        <p>Aperture:{{.Aperture}}</p>
+                        <p>FocalLength:{{.FocalLength}}</p>
+                        <p>ExposureTime:{{.ExposureTime}} </p>
+                    </div>
+                </div>
+                {{ end }}
+            </div>
+        </div>
+    </div>
+    <hr>
+{{ end }}
+
+<script>
+function togglePhotos(id) {
+    var photosDiv = document.getElementById(id);
+    if (photosDiv.style.display === "none") {
+        photosDiv.style.display = "block";
+    } else {
+        photosDiv.style.display = "none";
+    }
+}
+</script>
+
+</div>
+
+<ul class="pagination">
+    {{ $pageNum := .Pagination.PageNum}}
+    {{ $pageSize := .Pagination.PageSize}}
+
+    {{ range $page  := .Pagination.PagesSlice  }}
+    <li
+            class="{{ if eq $page $pageNum }}active{{end}}"
+    >
+        <a  href="/{{$page}}/{{ $pageSize }}">{{ $page }}</a>
+    </li>
+    {{end}}
+</ul>
+
+{{template "footer" .}}
